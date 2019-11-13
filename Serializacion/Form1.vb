@@ -38,6 +38,20 @@ Public Class Form1
         Return Encoding.ASCII.GetString(bytes)
 
     End Function
+
+    Public Shared Function CadenaABytes(cadena As String) As Byte()
+
+        Return Encoding.ASCII.GetBytes(cadena)
+
+    End Function
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
+        Dim listaDeserealizada As New List(Of ProductoBE)
+        Dim serializador As New XmlSerializer(listaDeserealizada.GetType())
+        listaDeserealizada = serializador.Deserialize(New MemoryStream(CadenaABytes(IO.File.ReadAllText("D:\Productos.xml"))))
+
+    End Sub
 End Class
 
 Public Class ProductoBE
